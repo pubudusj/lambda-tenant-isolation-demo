@@ -39,11 +39,22 @@ class LambdaTenantIsolationDemoStack(Stack):
             rest_api_name="Tenant Isolation Demo API",
         )
 
+        # Lambda integration with tenant_id query param mapped to X-Amz-Tenant-Id header
+        tenant_aware_integration = apigw.LambdaIntegration(
+            tenant_aware_lambda,
+            request_parameters={
+                "integration.request.header.X-Amz-Tenant-Id": "method.request.querystring.tenant_id"
+            },
+        )
+
         # Add /execute_tenant_aware_lambda endpoint
         tenant_aware_resource = api.root.add_resource("execute_tenant_aware_lambda")
         tenant_aware_resource.add_method(
             "GET",
-            apigw.LambdaIntegration(tenant_aware_lambda),
+            tenant_aware_integration,
+            request_parameters={
+                "method.request.querystring.tenant_id": True,
+            },
         )
 
         # Add /execute_generic_lambda endpoint
@@ -51,4 +62,7 @@ class LambdaTenantIsolationDemoStack(Stack):
         generic_resource.add_method(
             "GET",
             apigw.LambdaIntegration(generic_lambda),
+            request_parameters={
+                "method.request.querystring.tenant_id": True,
+            },
         )
