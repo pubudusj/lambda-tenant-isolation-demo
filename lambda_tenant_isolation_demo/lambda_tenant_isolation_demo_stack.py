@@ -1,4 +1,5 @@
 from aws_cdk import (
+    Duration,
     Stack,
     aws_lambda as _lambda,
     aws_apigateway as apigw,
@@ -19,6 +20,7 @@ class LambdaTenantIsolationDemoStack(Stack):
             handler="index.handler",
             code=_lambda.Code.from_asset("src/lambda/tenant_aware"),
             logging_format=_lambda.LoggingFormat.JSON,
+            timeout=Duration.seconds(20),
             tenancy_config=_lambda.TenancyConfig.PER_TENANT,
         )
 
@@ -30,6 +32,7 @@ class LambdaTenantIsolationDemoStack(Stack):
             handler="index.handler",
             code=_lambda.Code.from_asset("src/lambda/generic"),
             logging_format=_lambda.LoggingFormat.JSON,
+            timeout=Duration.seconds(20),
         )
 
         # Create API Gateway

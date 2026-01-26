@@ -1,4 +1,5 @@
 import json
+import time
 
 counter = 0
 
@@ -12,6 +13,8 @@ def handler(event, context):
         "tenant": context.tenant_id,
         "invocation_count": counter,
     }
+    # sleep 5 seconds to simulate long processing time
+    time.sleep(5)
 
     return {
         "statusCode": 200,
