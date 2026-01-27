@@ -14,8 +14,8 @@ def handler(event, context):
         "invocation_count": counter,
     }
 
-    # sleep 5 seconds to simulate long processing time
-    time.sleep(5)
+    # sleep 2 seconds to simulate long processing time
+    time.sleep(2)
 
     return {
         "statusCode": 200,
