@@ -15,7 +15,7 @@ def handler(event, context):
     }
 
     # sleep 2 seconds to simulate long processing time
-    time.sleep(2)
+    # time.sleep(2)
 
     return {
         "statusCode": 200,
