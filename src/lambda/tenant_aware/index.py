@@ -13,7 +13,7 @@ def handler(event, context):
 
     global counter
     counter += 1
-    tenant_id = getattr(context, "tenant_id", None) or "unknown"
+    tenant_id = context.tenant_id
 
     metric_namespace = os.environ.get("METRIC_NAMESPACE", "TenantIsolationDemo")
     metric_name = os.environ.get("METRIC_NAME", "TenantInvocation")
