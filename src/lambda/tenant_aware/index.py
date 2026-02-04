@@ -15,8 +15,8 @@ def handler(event, context):
     counter += 1
     tenant_id = context.tenant_id
 
-    metric_namespace = os.environ.get("METRIC_NAMESPACE", "TenantIsolationDemo")
-    metric_name = os.environ.get("METRIC_NAME", "TenantInvocation")
+    metric_namespace = "TenantIsolation"
+    metric_name = "TenantInvocation"
     cloudwatch.put_metric_data(
         Namespace=metric_namespace,
         MetricData=[

@@ -23,10 +23,6 @@ class LambdaTenantIsolationDemoStack(Stack):
             logging_format=_lambda.LoggingFormat.JSON,
             timeout=Duration.seconds(20),
             tenancy_config=_lambda.TenancyConfig.PER_TENANT,
-            environment={
-                "METRIC_NAMESPACE": "TenantIsolationDemo",
-                "METRIC_NAME": "TenantInvocation",
-            },
         )
 
         tenant_aware_lambda.add_to_role_policy(
