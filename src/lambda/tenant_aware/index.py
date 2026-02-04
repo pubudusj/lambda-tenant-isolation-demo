@@ -1,7 +1,11 @@
 import json
+import os
 import time
 
+import boto3
+
 counter = 0
+cloudwatch = boto3.client("cloudwatch")
 
 
 def handler(event, context):
@@ -9,8 +13,26 @@ def handler(event, context):
 
     global counter
     counter += 1
+    tenant_id = getattr(context, "tenant_id", None) or "unknown"
+
+    metric_namespace = os.environ.get("METRIC_NAMESPACE", "TenantIsolationDemo")
+    metric_name = os.environ.get("METRIC_NAME", "TenantInvocation")
+    cloudwatch.put_metric_data(
+        Namespace=metric_namespace,
+        MetricData=[
+            {
+                "MetricName": metric_name,
+                "Dimensions": [
+                    {"Name": "TenantId", "Value": tenant_id},
+                ],
+                "Unit": "Count",
+                "Value": 1,
+            }
+        ],
+    )
+
     output = {
-        "tenant": context.tenant_id,
+        "tenant": tenant_id,
         "invocation_count": counter,
     }
 
