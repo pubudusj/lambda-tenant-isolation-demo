@@ -1,7 +1,7 @@
 
-# Welcome to your CDK Python project!
+# AWS Lambda tenant isolation demo
 
-This is a blank project for CDK development with Python.
+Deploy this with AWS CDK with Python.
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
