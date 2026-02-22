@@ -1,6 +1,8 @@
 
 # AWS Lambda tenant isolation demo
 
+This repository contains the source code to show case the Lambda Tenant Isolation feature as described in the blog post: https://pubudu.dev/posts/understanding-lambda-tenant-isolation/
+
 Deploy this with AWS CDK with Python.
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
